@@ -18,7 +18,7 @@ if os.name=="nt":
         os.chmod(videolar, 0o755)
 
 # simple url for specified account like this
-ana_url = "https://ask.fm/bala_balance"
+ana_url = "https://ask.fm/user"
 
 global mesaj_sayisi,url_oku,soup,ek,yuzde
 
