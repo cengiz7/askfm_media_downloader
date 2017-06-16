@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.8.2
-#
-# WARNING! All changes made in this file will be lost!
-
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QRect,Qt,QMetaObject
+from PyQt5.QtGui import QFont,QGuiApplication,QBrush,QColor
+from PyQt5.QtWidgets import QAbstractScrollArea,QAbstractItemView,\
+QProgressBar,QListWidgetItem,QToolBar,QApplication,QMainWindow,QWidget,\
+    QMessageBox,QLabel,QLineEdit,QPushButton,QListWidget
 from bs4 import BeautifulSoup
 from urllib import request
 import os
@@ -20,31 +18,38 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumWidth(370)
         MainWindow.setStyleSheet("background-color: qlineargradient(spread:reflect, x1:0.472636, y1:0.398, x2:1, y2:0, stop:0.426136 rgba(255, 0, 0, 255), stop:1 rgba(167, 0, 0, 255));")
         MainWindow.setWindowTitle("Ask.fm media Downloader")
-        self.centralWidget = QtWidgets.QWidget(MainWindow)
-        self.uyari = QtWidgets.QMessageBox()
-        self.uyari.setIcon(QtWidgets.QMessageBox.Warning)
+        self.centralWidget = QWidget(MainWindow)
+        self.uyari = QMessageBox()
+        self.uyari.setIcon(QMessageBox.Warning)
         self.uyari.setInformativeText("Girdiğiniz link yanlış olabilir.")
         self.uyari.setWindowTitle("- Uyarı -")
-        self.uyari.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        self.label = QtWidgets.QLabel(self.centralWidget)
-        self.label.setGeometry(QtCore.QRect(50, 10, 311, 21))
-        font = QtGui.QFont()
+        self.uyari.setStandardButtons(QMessageBox.Ok)
+
+        self.bosuyarisi = QMessageBox()
+        self.bosuyarisi.setIcon(QMessageBox.Warning)
+        self.bosuyarisi.setInformativeText("Kullanıcının hiçbir medya içerikli yanıtı bulunmuyor :(")
+        self.bosuyarisi.setWindowTitle("Maleseff")
+        self.bosuyarisi.setStandardButtons(QMessageBox.Ok)
+
+        self.label = QLabel(self.centralWidget)
+        self.label.setGeometry(QRect(50, 10, 311, 21))
+        font = QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.488, y1:0.493, x2:1, y2:0, stop:0.301136 rgba(180, 232, 0, 255), stop:1 rgba(255, 255, 255, 255));")
         self.label.setText("Ask.fm Kullanıcı Url Adresini Girin")
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.lineEdit = QtWidgets.QLineEdit(self.centralWidget)
-        self.lineEdit.setGeometry(QtCore.QRect(50, 40, 311, 22))
+        self.label.setAlignment(Qt.AlignCenter)
+        self.lineEdit = QLineEdit(self.centralWidget)
+        self.lineEdit.setGeometry(QRect(50, 40, 311, 22))
         self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.lineEdit.setInputMask("")
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText("Örn : https://ask.fm/user")
         self.lineEdit.setClearButtonEnabled(True)
-        self.pushButton = QtWidgets.QPushButton(self.centralWidget)
-        self.pushButton.setGeometry(QtCore.QRect(270, 70, 91, 25))
-        font = QtGui.QFont()
+        self.pushButton = QPushButton(self.centralWidget)
+        self.pushButton.setGeometry(QRect(270, 70, 91, 25))
+        font = QFont()
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
@@ -53,23 +58,22 @@ class Ui_MainWindow(object):
         self.pushButton.setText("İşlemi Başlat")
         self.pushButton.setCheckable(False)
         self.pushButton.setAutoRepeatInterval(200)
-        self.listWidget = QtWidgets.QListWidget(self.centralWidget)
-        self.listWidget.setGeometry(QtCore.QRect(10, 100, 351, 191))
-        font = QtGui.QFont()
+        self.listWidget = QListWidget(self.centralWidget)
+        self.listWidget.setGeometry(QRect(10, 100, 351, 191))
+        font = QFont()
         font.setPointSize(10)
         self.listWidget.setFont(font)
         self.listWidget.setStyleSheet("background-color: rgb(255, 235, 255);")
         self.listWidget.setLineWidth(3)
-        self.listWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.listWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.listWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.listWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.listWidget.setProperty("showDropIndicator", False)
-        self.listWidget.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
-        self.listWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.listWidget.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.listWidget.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.listWidget.setSortingEnabled(False)
-        item = QtWidgets.QListWidgetItem()
-        self.progressBar = QtWidgets.QProgressBar(self.centralWidget)
-        self.progressBar.setGeometry(QtCore.QRect(10, 300, 366, 17))
-        font = QtGui.QFont()
+        self.progressBar = QProgressBar(self.centralWidget)
+        self.progressBar.setGeometry(QRect(10, 300, 366, 17))
+        font = QFont()
         font.setBold(True)
         font.setWeight(50)
         self.progressBar.setFont(font)
@@ -78,7 +82,7 @@ class Ui_MainWindow(object):
         self.progressBar.setValue(0)
         def presBar(d):
             self.progressBar.setValue(d)
-            QtGui.QGuiApplication.processEvents()
+            QGuiApplication.processEvents()
         def mainloop():
             # creating directories in to the current working directory.
             if os.name == "nt":
@@ -93,7 +97,7 @@ class Ui_MainWindow(object):
                     os.chmod(videolar, 0o755)
             ana_url = self.lineEdit.text()
             global mesaj_sayisi, url_oku, soup, ek, yuzde
-            ek = 1
+            ek = 0
             url_oku = request.urlopen(ana_url)
             soup = BeautifulSoup(url_oku, 'html.parser')
             mesaj_sayisi = soup.find_all('div', attrs={'class', 'profileTabAnswerCount'}, limit=1)
@@ -119,14 +123,15 @@ class Ui_MainWindow(object):
                         if not os.path.isfile(os.sep.join([videolar, video_adi[1]])):
                             open(os.sep.join([videolar, video_adi[1]]), 'w')
                             request.urlretrieve(yeni_video[7], os.sep.join([videolar, video_adi[1]]))
-                            metin ="Video kaydedildi --=> " + video_adi[1]
+                            metin ="Video kaydedildi -=> " + video_adi[1]
+                            item = QListWidgetItem()
                             item.setText(metin)
-                            brush = QtGui.QBrush(QtGui.QColor(32, 132, 255))
-                            brush.setStyle(QtCore.Qt.SolidPattern)
+                            brush = QBrush(QColor(32, 132, 255))
+                            brush.setStyle(Qt.SolidPattern)
                             item.setBackground(brush)
-                            item.setFlags(QtCore.Qt.ItemIsEnabled)
+                            item.setFlags(Qt.ItemIsEnabled)
                             self.listWidget.addItem(item)
-                            QtGui.QGuiApplication.processEvents()
+                            QGuiApplication.processEvents()
                         ek = ek + 1
                 if str(resim) != "[]":
                     for ii in range(0, len(resim)):
@@ -139,14 +144,15 @@ class Ui_MainWindow(object):
                             if not os.path.isfile(os.sep.join([resimler, resim_adi])):
                                 open(os.sep.join([resimler, resim_adi]), 'w')
                                 request.urlretrieve(yeni_resim[17], os.sep.join([resimler, resim_adi]))
-                                metin = "Resim kaydedildi ----=> " + resim_adi
+                                metin = "Resim kaydedildi -=> " + resim_adi
+                                item = QListWidgetItem()
                                 item.setText(metin)
-                                brush = QtGui.QBrush(QtGui.QColor(255, 255, 0))
-                                brush.setStyle(QtCore.Qt.SolidPattern)
+                                brush = QBrush(QColor(255, 255, 0))
+                                brush.setStyle(Qt.SolidPattern)
                                 item.setBackground(brush)
-                                item.setFlags(QtCore.Qt.ItemIsEnabled)
+                                item.setFlags(Qt.ItemIsEnabled)
                                 self.listWidget.addItem(item)
-                                QtGui.QGuiApplication.processEvents()
+                                QGuiApplication.processEvents()
                             ek = ek + 1
                         except:
                             pass
@@ -158,17 +164,18 @@ class Ui_MainWindow(object):
                     yeni_link = url[5]
                     yeni_link = yeni_link.split("/", 2)
                     yeni_link = ana_url + "/" + yeni_link[2]
-                    QtGui.QGuiApplication.processEvents()
+                    QGuiApplication.processEvents()
                     url_oku = request.urlopen(yeni_link)
-                    QtGui.QGuiApplication.processEvents()
+                    QGuiApplication.processEvents()
                     soup = BeautifulSoup(url_oku, 'html.parser')
                     yeni_data += 1
                 except:
-                    print("||| ISLEM TAMAM |||")
                     yuzde = 100
                     presBar(yuzde)
+                    if ek == 1:
+                        self.bosuyarisi.exec_()
                     break
-                QtGui.QGuiApplication.processEvents()
+                QGuiApplication.processEvents()
         def kontrol():
             if len(self.lineEdit.text().split("/")) != 4:
                 self.uyari.exec_()
@@ -177,17 +184,18 @@ class Ui_MainWindow(object):
 
 
         MainWindow.setCentralWidget(self.centralWidget)
-        self.mainToolBar = QtWidgets.QToolBar(MainWindow)
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.mainToolBar = QToolBar(MainWindow)
+        MainWindow.addToolBar(Qt.TopToolBarArea, self.mainToolBar)
+        QMetaObject.connectSlotsByName(MainWindow)
         self.pushButton.clicked.connect(kontrol)
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    app = QApplication(sys.argv)
+    MainWindow = QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
 
