@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# Cengiz Üçgül
 from PyQt5.QtCore import QRect,Qt,QMetaObject
 from PyQt5.QtGui import QFont,QGuiApplication,QBrush,QColor
 from PyQt5.QtWidgets import QAbstractScrollArea,QAbstractItemView,\
@@ -120,10 +120,10 @@ class Ui_MainWindow(object):
                         yeni_video = str(video[ii])
                         yeni_video = yeni_video.split('"', 8)
                         video_adi = yeni_video[7].split("video_")
-                        if not os.path.isfile(os.sep.join([videolar, video_adi[1]])):
-                            open(os.sep.join([videolar, video_adi[1]]), 'w')
-                            request.urlretrieve(yeni_video[7], os.sep.join([videolar, video_adi[1]]))
-                            metin ="Video kaydedildi -=> " + video_adi[1]
+                        if not os.path.isfile(os.sep.join([videolar, video_adi[-1]])):
+                            open(os.sep.join([videolar, video_adi[-1]]), 'w')
+                            request.urlretrieve(yeni_video[7], os.sep.join([videolar, video_adi[-1]]))
+                            metin ="Video kaydedildi -=> " + video_adi[-1]
                             item = QListWidgetItem()
                             item.setText(metin)
                             brush = QBrush(QColor(32, 132, 255))
@@ -139,7 +139,7 @@ class Ui_MainWindow(object):
                         yeni_resim = yeni_resim.split('"', 18)
                         try:
                             resim_adi = yeni_resim[17].split("/")
-                            resim_adi = resim_adi[8]
+                            resim_adi = resim_adi[-1]
                             resim_adi = str(ek) + "-" + resim_adi
                             if not os.path.isfile(os.sep.join([resimler, resim_adi])):
                                 open(os.sep.join([resimler, resim_adi]), 'w')
@@ -197,5 +197,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
-
