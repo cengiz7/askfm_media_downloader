@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
                     for ii in range(0, len(video)):
                         yeni_video = str(video[ii])
                         yeni_video = yeni_video.split('"', 8)
-                        video_adi = yeni_video[7].split("video_")
+                        video_adi = yeni_video[7].split("/")
                         if not os.path.isfile(os.sep.join([videolar, video_adi[-1]])):
                             open(os.sep.join([videolar, video_adi[-1]]), 'w')
                             request.urlretrieve(yeni_video[7], os.sep.join([videolar, video_adi[-1]]))
@@ -131,6 +131,7 @@ class Ui_MainWindow(object):
                             item.setBackground(brush)
                             item.setFlags(Qt.ItemIsEnabled)
                             self.listWidget.addItem(item)
+                            self.listWidget.scrollToBottom()
                             QGuiApplication.processEvents()
                         ek = ek + 1
                 if str(resim) != "[]":
@@ -152,6 +153,7 @@ class Ui_MainWindow(object):
                                 item.setBackground(brush)
                                 item.setFlags(Qt.ItemIsEnabled)
                                 self.listWidget.addItem(item)
+                                self.listWidget.scrollToBottom()
                                 QGuiApplication.processEvents()
                             ek = ek + 1
                         except:
